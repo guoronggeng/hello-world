@@ -1,3 +1,75 @@
-//å°æ˜Žæœ‰ 5 å¼ æ•°å­—å¡ç‰‡ï¼Œä¸Šé¢åˆ†åˆ«ä¸ºæ•°å­— 1ï¼Œ 2ï¼Œ 3ï¼Œ 6ï¼Œ 9ã€‚å°æ˜Žæƒ³ç”¨è¿™ 5 å¼ æ•°å­—å¡ç‰‡ç»„æˆä¸€ä¸ªæœ€å¤§çš„ 5 ä½
-//ç´ æ•°ï¼Œè¿™ä¸ªäº”ä½æ•°æ˜¯_______ã€‚
-//ç¼–ç¨‹ï¼šä»»æ„è¾“å…¥5ä¸ªæ•°å­—ï¼Œå°†å®ƒä»¬ç»„åˆä¸ºæœ€å¤§çš„5ä½ç´ æ•°è¾“å‡ºã€‚å¦‚æžœä¸å­˜åœ¨5ä½ç´ æ•°ï¼Œåˆ™è¾“å‡ºERRORã€‚
+//Ð¡Ã÷ÓÐ 5 ÕÅÊý×Ö¿¨Æ¬£¬ÉÏÃæ·Ö±ðÎªÊý×Ö 1£¬ 2£¬ 3£¬ 6£¬ 9¡£Ð¡Ã÷ÏëÓÃÕâ 5 ÕÅÊý×Ö¿¨Æ¬×é³ÉÒ»¸ö×î´óµÄ 5 Î»
+//ËØÊý£¬Õâ¸öÎåÎ»ÊýÊÇ_______¡£
+//±à³Ì£ºÈÎÒâÊäÈë5¸öÊý×Ö£¬½«ËüÃÇ×éºÏÎª×î´óµÄ5Î»ËØÊýÊä³ö¡£Èç¹û²»´æÔÚ5Î»ËØÊý£¬ÔòÊä³öERROR¡£
+#include<stdio.h>
+#include<math.h>
+int entire[200];
+int w=0;
+int prime(int b[],int e){
+	int i=2;
+	int c=1;
+	for(i=2;i<=b[e]-1;i++){
+		if(b[e]%i==0){
+			c=0;
+		}
+	}
+	return c;
+}
+void all(int a[],int b ,int c){
+	if(b==c){
+		int j=0;
+		int k=4;
+		int sum=0;
+		for(j=0;j<=4;j++){
+			sum+=a[j]*pow(10,k);
+			k--;
+		}
+		entire[w]=sum;
+		w++;
+	}
+	else{
+		int i=b;
+		int temp;
+		for(i=b;i<=c;i++){
+			temp=a[i];
+			a[i]=a[b];
+			a[b]=temp;
+			all(a,b+1,4);
+			temp=a[i];
+			a[i]=a[b];
+			a[b]=temp;
+		}
+	}
+}
+int main(){
+	int a[5];
+	int i=0;
+	for(i=0;i<=4;i++){
+			scanf("%d",&a[i]);
+	}
+	int j=0,k=0;
+	int temp;
+	for(j=0;j<=3;j++){
+		for(k=0;k<=3;k++){
+			if(a[k]<a[k+1]){
+				temp=a[k];
+				a[k]=a[k+1];
+				a[k+1]=temp;
+			}
+		}
+	}
+	all(a,0,4);
+	int l=0;
+	int go=0;
+	for(l=0;l<=w-1;l++){
+		if(prime(entire,l)==1){
+			printf("%d\n");
+			go=1;
+			break;
+		}
+	}
+	if(go==0){
+		printf("ERROR\n");
+	}
+	return 0;
+} 
