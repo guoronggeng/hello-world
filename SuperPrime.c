@@ -1,2 +1,75 @@
-//è¶…çº§ç´ æ•°ï¼šå®ƒæœ¬èº«ï¼Œå„ä½æ•°å­—çš„å’Œï¼Œå„ä½æ•°å­—çš„å¹³æ–¹å’Œï¼Œéƒ½æ˜¯ç´ æ•°ã€‚
-//æ±‚ 100~10000 å†…çš„æ‰€æœ‰è¶…çº§ç´ æ•°ï¼ŒåŠå®ƒä»¬çš„å¹³å‡æ•°ã€‚
+//³¬¼¶ËØÊı£ºËü±¾Éí£¬¸÷Î»Êı×ÖµÄºÍ£¬¸÷Î»Êı×ÖµÄÆ½·½ºÍ£¬¶¼ÊÇËØÊı¡£
+//Çó 100~10000 ÄÚµÄËùÓĞ³¬¼¶ËØÊı£¬¼°ËüÃÇµÄÆ½¾ùÊı¡£
+#include<stdio.h>
+int prime(int a){
+		int c=1;
+	if(a==0||a==1){
+		c=0;
+	}
+	if(a==2){
+		c=1;
+	}
+	if(a>2){
+	int i=2;
+	for(i=2;i<=a-1;i++){
+		if(a%i==0){
+			c=0;
+		}
+	}
+}
+	return c;
+}
+int suprime1(int a[],int j){
+	int i=0;
+	int su=0;
+	int sum=0;
+	for(i=0;i<=j-1;i++){
+		sum+=a[i];
+	}
+	if(prime(sum)==1){
+		su=1;
+	}
+	return su;
+}
+int suprime2(int a[],int j){
+	int i=0;
+	int su=0;
+	int sum=0;
+	for(i=0;i<=j-1;i++){
+		int c=a[i]*a[i];
+		sum+=c;
+	}
+	if(prime(sum)==1){
+		su=1;
+	}
+	return su;
+}
+int main(){
+	int i=100;
+	int b[1000];
+	int cnt=0;
+	for(i=100;i<=10000;i++){
+		if(prime(i)==1){
+			int w;
+			int a[5];
+			w=i;
+			int j=0;
+			while(w>0){
+			a[j]=w%10;
+			w=w/10;
+			j++;	
+			}
+			int c=suprime1(a,j);
+			int d=suprime2(a,j);
+			if(c==1&&d==1){
+				b[cnt]=i;
+				cnt++;
+			}
+		}
+	}
+	int l=0;
+	for(l=0;l<=cnt-1;l++){
+		printf("%d\n",b[l]);
+	}
+	return 0;
+} 
